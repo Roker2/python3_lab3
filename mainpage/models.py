@@ -5,7 +5,7 @@ from django.db import models
 class Device(models.Model):
     name = models.CharField(max_length=50)
     picture = models.ImageField()
-    url = models.TextField()
+    url = models.URLField()
 
 
 def publish(self):
