@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Device(models.Model):
-    name = models.TextField()
+    name = models.CharField(max_length=50)
     picture = models.ImageField()
     url = models.TextField()
 
