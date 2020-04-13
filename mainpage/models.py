@@ -7,10 +7,8 @@ class Device(models.Model):
     picture = models.ImageField()
     url = models.URLField()
 
+    def publish(self):
+        self.save()
 
-def publish(self):
-    self.save()
-
-
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
