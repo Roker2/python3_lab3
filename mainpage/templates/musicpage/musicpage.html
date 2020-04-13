@@ -8,6 +8,8 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-
+        {% for single in music %}
+            <iframe frameborder="0" style="border:none;width:100%;height:180px;" width="100%" height="180" src={{ single.musicUrlWithGrid }}>Слушайте <a href={{ single.musicUrl }}>{{ single.musicName }}</a> — <a href={{ single.artistUrl }}>{{ single.artistName }}</a> на Яндекс.Музыке</iframe>
+        {% endfor %}
     </body>
 </html>

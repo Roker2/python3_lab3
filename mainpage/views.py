@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Device
+from .models import YandexMusic
 
 
 def mainpage(request):
@@ -8,4 +9,4 @@ def mainpage(request):
 
 
 def musicpage(request):
-    return render(request, 'musicpage/musicpage.html', {})
+    return render(request, 'musicpage/musicpage.html', {'music': YandexMusic.objects.all()})
