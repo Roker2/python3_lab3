@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from .models import Device
 
 
 def mainpage(request):
-    return render(request, 'mainpage/mainpage.html', {})
+    devices = Device.objects.all()
+    return render(request, 'mainpage/mainpage.html', {'devices': devices})

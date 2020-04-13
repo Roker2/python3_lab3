@@ -1,4 +1,14 @@
 <html>
-    <p>Hi there!</p>
-    <p>It works!</p>
+    <head>
+         <title>Rok page</title>
+    </head>
+    <body>
+        {% block sidebar %}
+        <ul class="sidebar-nav">
+            {% for device in devices %}
+                <li><a href={{ device.url }}>{{ device.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endblock %}
+    </body>
 </html>
