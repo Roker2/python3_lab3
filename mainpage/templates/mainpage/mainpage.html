@@ -1,33 +1,9 @@
 <html>
     <head>
-
-        <style type="text/css">
-            .sidebar-nav {
-                height:100%;
-                width:160px;
-                position: fixed;
-                z-index:1;
-                top:0;
-                left:0;
-                background-color:#111;
-                overflow-x: :hidden;
-                padding-top:20px;
-            }
-
-            .sidebar-nav a {
-                padding:6px 8px 6px 16px;
-                font-size:16px;
-                color: #dbdbdb;
-                display:block;
-            }
-
-            .sidebar-nav a:hover{
-                color:#FFFFFF;
-            }
-	    </style>
-
+        {% load static %}
         <title>Rok page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/sidebar-nav.css' %}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
