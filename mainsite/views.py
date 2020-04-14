@@ -9,3 +9,7 @@ def mainpage(request):
 
 def musicpage(request):
     return render(request, 'musicpage/musicpage.html', {'music': YandexMusic.objects.all(), 'mp3s': mp3Music.objects.all() })
+
+
+def devicespage(request):
+    return render(request, 'devicespage/devicespage.html', {})
