@@ -2,6 +2,6 @@ venv
 db.sqlite3
 .idea
 __pycache__
-mainpage/migrations
+mainsite/migrations
 *.jpg
 *.png
