@@ -36,5 +36,8 @@ class mp3Music(models.Model):
     def publish(self):
         self.save()
 
+    def fullsinglename(self):
+        return str(self)
+
     def __str__(self):
         return self.artistName + ' - ' + self.musicName
