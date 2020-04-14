@@ -26,3 +26,15 @@ class YandexMusic(models.Model):
 
     def __str__(self):
         return self.artistName + ' - ' + self.musicName
+
+
+class mp3Music(models.Model):
+    musicUrl = models.URLField()
+    musicName = models.CharField(max_length=50)
+    artistName = models.CharField(max_length=50)
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.artistName + ' - ' + self.musicName
