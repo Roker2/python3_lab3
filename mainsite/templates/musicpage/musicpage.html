@@ -1,27 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        {% load static %}
-        <meta charset="UTF-8">
-        <title>Rocker2's favorite music</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href='https://fonts.googleapis.com/css?family=Allerta' rel='stylesheet'>
-        <link rel="stylesheet" href="{% static 'css/audio-player.css' %}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        {% for single in music %}
-            <iframe frameborder="0" style="border:none;width:100%;height:180px;" width="100%" height="180" src={{ single.musicUrlWithGrid }}>Слушайте <a href={{ single.musicUrl }}>{{ single.musicName }}</a> — <a href={{ single.artistUrl }}>{{ single.artistName }}</a> на Яндекс.Музыке</iframe>
-        {% endfor %}
-            {% for mp3 in mp3s %}
-                <div class="container-audio">
-                    <h3>{{ mp3.fullsinglename }}</h3>
-                    <audio controls>
-                        <source src={{ mp3.musicUrl }} type="audio/mp3" >
-                        Your browser dose not Support the audio Tag
-                    </audio>
-                </div>
-            {% endfor %}
-    </body>
-</html>
+{% extends "sidebar-nav.html" %}
+{% block head %}
+    {% load static %}
+    <title>Rocker2's favorite music</title>
+    <link rel="stylesheet" href="{% static 'css/audio-player.css' %}">
+{% endblock %}
+{% block content %}
+    {% for single in music %}
+        <iframe frameborder="0" style="border:none;width:100%;height:180px;" width="100%" height="180" src={{ single.musicUrlWithGrid }}>Слушайте <a href={{ single.musicUrl }}>{{ single.musicName }}</a> — <a href={{ single.artistUrl }}>{{ single.artistName }}</a> на Яндекс.Музыке</iframe>
+    {% endfor %}
+    {% for mp3 in mp3s %}
+        <div class="container-audio">
+            <h3>{{ mp3.fullsinglename }}</h3>
+            <audio controls>
+                <source src={{ mp3.musicUrl }} type="audio/mp3" >
+                Your browser dose not Support the audio Tag
+            </audio>
+        </div>
+    {% endfor %}
+{% endblock %}
