@@ -15,14 +15,13 @@
             <iframe frameborder="0" style="border:none;width:100%;height:180px;" width="100%" height="180" src={{ single.musicUrlWithGrid }}>Слушайте <a href={{ single.musicUrl }}>{{ single.musicName }}</a> — <a href={{ single.artistUrl }}>{{ single.artistName }}</a> на Яндекс.Музыке</iframe>
         {% endfor %}
             {% for mp3 in mp3s %}
-                    <div class="container-audio">
-                        <h3>{{ mp3.fullsinglename }}</h3>
-                        <audio controls>
-                            <source src={{ mp3.musicUrl }} type="audio/mp3" >
-                            Your browser dose not Support the audio Tag
-                        </audio>
-                    </div>
+                <div class="container-audio">
+                    <h3>{{ mp3.fullsinglename }}</h3>
+                    <audio controls>
+                        <source src={{ mp3.musicUrl }} type="audio/mp3" >
+                        Your browser dose not Support the audio Tag
+                    </audio>
+                </div>
             {% endfor %}
-    </div>
     </body>
 </html>
