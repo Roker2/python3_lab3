@@ -1,0 +1,30 @@
+/* Global Reset */
+/** {
+    font-family: 'Allerta', arial, Tahoma;
+    box-sizing: border-box;
+}
+body {
+    background: linear-gradient(to left, #7700aa, #8800ff);
+    text-align:center;
+    color:#fff;
+}
+h3{
+    text-shadow:1px 1px 1px #fff;
+}*/
+/* Start  styling the page */
+.container-audio {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #eee;
+    color: #444;
+    margin: 20px auto;
+    overflow: hidden;
+}
+audio {
+  width:100%;
+}
+audio:nth-child(2), audio:nth-child(4), audio:nth-child(6) {
+    margin: 0;
+}
