@@ -14,14 +14,16 @@ class Device(models.Model):
         return self.name
 
 
-class baseMusic(models.Model):
-    artistName = models.CharField(max_length=50)
-    musicName = models.CharField(max_length=50)
+class Artist(models.Model):
+    Name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.Name
 
 
 class YandexMusic(models.Model):
-    artistName = models.CharField(max_length=50)
     musicName = models.CharField(max_length=50)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
     trackInt = models.IntegerField(default=0)
     albumInt = models.IntegerField(default=0)
     artistInt = models.IntegerField(default=0)
@@ -39,13 +41,13 @@ class YandexMusic(models.Model):
         self.save()
 
     def __str__(self):
-        return self.artistName + ' - ' + self.musicName
+        return str(self.artist) + ' - ' + str(self.musicName)
 
 
 class mp3Music(models.Model):
     musicUrl = models.URLField()
     musicName = models.CharField(max_length=50)
-    artistName = models.CharField(max_length=50)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
 
     def publish(self):
         self.save()
@@ -54,4 +56,4 @@ class mp3Music(models.Model):
         return str(self)
 
     def __str__(self):
-        return self.artistName + ' - ' + self.musicName
+        return str(self.artist) + ' - ' + str(self.musicName)
