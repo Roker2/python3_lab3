@@ -57,3 +57,18 @@ class mp3Music(models.Model):
 
     def __str__(self):
         return str(self.artist) + ' - ' + str(self.musicName)
+
+
+class mp3LocalMusic(models.Model):
+    musicFile = models.FileField()
+    musicName = models.CharField(max_length=50)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
+
+    def publish(self):
+        self.save()
+
+    def fullsinglename(self):
+        return str(self)
+
+    def __str__(self):
+        return str(self.artist) + ' - ' + str(self.musicName)
