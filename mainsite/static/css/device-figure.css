@@ -1,0 +1,6 @@
+figure {
+    display: block;
+    float: center; /* Блоки выстраиваются по горизонтали */
+    vertical-align: middle;
+    text-align: center; /* Выравнивание по центру */
+}
