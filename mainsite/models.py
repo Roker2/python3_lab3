@@ -1,10 +1,21 @@
 from django.db import models
 
 
-# Create your models here.
+# For saving memory
+class Picture(models.Model):
+    name = models.CharField(max_length=50)
+    file = models.ImageField()
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.name
+
+
 class Device(models.Model):
     name = models.CharField(max_length=50)
-    picture = models.ImageField()
+    picture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)
     url = models.URLField()
 
     def publish(self):
