@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import YandexMusic
 from .models import mp3Music
+from .models import mp3LocalMusic
 from .models import Device
 
 
@@ -9,7 +10,10 @@ def mainpage(request):
 
 
 def musicpage(request):
-    return render(request, 'musicpage/musicpage.html', {'music': YandexMusic.objects.all(), 'mp3s': mp3Music.objects.all() })
+    return render(request, 'musicpage/musicpage.html',
+                  {'music': YandexMusic.objects.all(),
+                   'mp3s': mp3Music.objects.all(),
+                   'localmp3s': mp3LocalMusic.objects.all()})
 
 
 def devicespage(request):

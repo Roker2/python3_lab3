@@ -19,4 +19,13 @@
             </audio>
         </div>
     {% endfor %}
+    {% for mp3 in localmp3s %}
+        <div class="container-audio">
+            <h3>{{ mp3.fullsinglename }}</h3>
+            <audio controls>
+                <source src={{ mp3.musicFile.url }} type="audio/mp3" >
+                Your browser dose not Support the audio Tag
+            </audio>
+        </div>
+    {% endfor %}
 {% endblock %}
