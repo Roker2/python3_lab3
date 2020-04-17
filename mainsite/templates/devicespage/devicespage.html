@@ -1,9 +1,14 @@
 {% extends "sidebar-nav.html" %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/device-figure.css' %}">
+{% endblock %}
 {% block content %}
-<p>
-    {% load imagefit %}
-    {% for device in devices %}
-        <img src="{{ device.picture.url|resize:'500x300' }}">
-    {% endfor %}
-</p>
+{% load imagefit %}
+{% for device in devices %}
+    <figure>
+        <p><img src="{{ device.picture.url|resize:'500x300' }}"></p>
+        <figcaption>{{ device.name }}</figcaption>
+    </figure>
+{% endfor %}
 {% endblock %}
