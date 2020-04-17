@@ -14,6 +14,11 @@ class Device(models.Model):
         return self.name
 
 
+class baseMusic(models.Model):
+    artistName = models.CharField(max_length=50)
+    musicName = models.CharField(max_length=50)
+
+
 class YandexMusic(models.Model):
     artistName = models.CharField(max_length=50)
     musicName = models.CharField(max_length=50)
