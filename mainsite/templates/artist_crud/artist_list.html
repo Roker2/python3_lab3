@@ -1,0 +1,30 @@
+<html>
+    <!--head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head-->
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for artist in object_list %}
+                    <tr>
+                        <td>{{ artist.Name }}</td>
+                        <td>
+                            <a href="{% url "artist_detail" artist.id  %}">details</a>
+                            <a href="{% url "artist_edit" artist.id  %}">edit</a>
+                            <a href="{% url "artist_delete" artist.id  %}">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url "artist_create" %}">Create</a>
+    </body>
+</html>
