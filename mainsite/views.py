@@ -7,6 +7,7 @@ from .models import YandexMusic
 from .models import mp3Music
 from .models import mp3LocalMusic
 from .models import Device
+from .models import Picture
 
 
 def mainpage(request):
@@ -52,3 +53,42 @@ class ArtistDelete(DeleteView):
     model = Artist
     template_name = 'artist_crud/artist_confirm_delete.html'
     success_url = reverse_lazy('artist_list')
+
+
+class UploadPic(CreateView):
+    model = Picture
+    template_name = 'picture_crud/picture_create.html'
+    fields = ['name', 'file']
+    reverse_lazy('')
+
+    def set_success_url(self, url):
+        self.success_url = reverse_lazy(url)
+
+
+class AddDevice(CreateView):
+    model = Device
+    template_name = 'device_crud/device_create.html'
+    fields = ['name', 'picture', 'url']
+
+
+class AddYandexMusic(CreateView):
+    model = YandexMusic
+    template_name = 'yandexmusic_crud/yandexmusic_create.html'
+    fields = ['musicName', 'artist', 'trackInt', 'albumInt', 'artistInt']
+
+
+class Addmp3Music(CreateView):
+    model = mp3Music
+    template_name = 'base_form/base_form.html'
+    fields = ['artist', 'musicName', 'musicUrl']
+
+
+class Addmp3LocalMusic(CreateView):
+    model = mp3LocalMusic
+    template_name = 'base_form/base_form.html'
+    fields = ['artist', 'musicName', 'musicFile']
+
+    """
+    def post(self, request, *args, **kwargs):
+        return render(request, 'mainpage/mainpage.html', {})
+    """

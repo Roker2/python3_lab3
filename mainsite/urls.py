@@ -10,4 +10,9 @@ urlpatterns = [
     path('create', views.ArtistCreate.as_view(), name='artist_create'),
     path('edit/<int:pk>', views.ArtistUpdate.as_view(), name='artist_edit'),
     path('delete/<int:pk>', views.ArtistDelete.as_view(), name='artist_delete'),
+    path('uploadpic', views.UploadPic.as_view()),
+    path('adddevice', views.AddDevice.as_view()),
+    path('addyandex', views.AddYandexMusic.as_view()),
+    path('addmp3', views.Addmp3Music.as_view()),
+    path('addlocalmp3', views.Addmp3LocalMusic.as_view()),
 ]

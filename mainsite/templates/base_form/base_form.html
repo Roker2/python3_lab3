@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    {% block content_before %}{% endblock %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit"/>
+        </form>
+    {% block content_after %}{% endblock %}
+    </body>
+</html>
