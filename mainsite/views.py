@@ -34,10 +34,10 @@ def add_mp3(request):
         artistform = ArtistForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
-            return redirect(reverse_lazy('favoritemusic'))
+            return redirect(reverse_lazy('musicpage'))
         if artistform.is_valid():
             artistform.save(commit=True)
-            return redirect(reverse_lazy('favoritemusic'))
+            return redirect(reverse_lazy('addmp3'))
     else:
         form = mp3MusicForm()
         artistform = ArtistForm()
