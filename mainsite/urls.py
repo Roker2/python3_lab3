@@ -13,6 +13,6 @@ urlpatterns = [
     path('uploadpic', views.UploadPic.as_view()),
     path('adddevice', views.AddDevice.as_view()),
     path('addyandex', views.AddYandexMusic.as_view()),
-    path('addmp3', views.Addmp3Music.as_view()),
+    path('addmp3', views.add_mp3),
     path('addlocalmp3', views.Addmp3LocalMusic.as_view()),
 ]

@@ -2,12 +2,15 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect
 from .models import Artist
 from .models import YandexMusic
 from .models import mp3Music
 from .models import mp3LocalMusic
 from .models import Device
 from .models import Picture
+from .forms import mp3MusicForm
+from .forms import ArtistForm
 
 
 def mainpage(request):
@@ -23,6 +26,23 @@ def musicpage(request):
 
 def devicespage(request):
     return render(request, 'devicespage/devicespage.html', {'devices': Device.objects.all()})
+
+
+def add_mp3(request):
+    if request.method == 'POST':
+        form = mp3MusicForm(request.POST)
+        artistform = ArtistForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect(reverse_lazy('favoritemusic'))
+        if artistform.is_valid():
+            artistform.save(commit=True)
+            return redirect(reverse_lazy('favoritemusic'))
+    else:
+        form = mp3MusicForm()
+        artistform = ArtistForm()
+        return render(request, 'mp3music_crud/mp3music_create.html', {'form': form,
+                                                                      'artistform': artistform})
 
 
 class ArtistList(ListView):
@@ -75,19 +95,6 @@ class AddYandexMusic(CreateView):
     model = YandexMusic
     template_name = 'yandexmusic_crud/yandexmusic_create.html'
     fields = ['musicName', 'artist', 'trackInt', 'albumInt', 'artistInt']
-
-
-class Addmp3Music(CreateView):
-    model = mp3Music
-    template_name = 'mp3music_crud/mp3music_create.html'
-    fields = ['artist', 'musicName', 'musicUrl']
-
-    """
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_invalid(form)
-    """
 
 
 class Addmp3LocalMusic(CreateView):

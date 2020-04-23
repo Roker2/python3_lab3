@@ -1,3 +1,12 @@
 {% extends "base_form/base_form.html" %}
+{% block content_before %}
+    <h1>mp3 music</h1>
+{% endblock %}
 {% block content_after %}
+    <h1>Artist</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ artistform.as_p }}
+        <input type="submit" value="Submit"/>
+    </form>
 {% endblock %}
