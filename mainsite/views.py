@@ -79,16 +79,18 @@ class AddYandexMusic(CreateView):
 
 class Addmp3Music(CreateView):
     model = mp3Music
-    template_name = 'base_form/base_form.html'
+    template_name = 'mp3music_crud/mp3music_create.html'
     fields = ['artist', 'musicName', 'musicUrl']
+
+    """
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_invalid(form)
+    """
 
 
 class Addmp3LocalMusic(CreateView):
     model = mp3LocalMusic
     template_name = 'base_form/base_form.html'
     fields = ['artist', 'musicName', 'musicFile']
-
-    """
-    def post(self, request, *args, **kwargs):
-        return render(request, 'mainpage/mainpage.html', {})
-    """
