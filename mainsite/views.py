@@ -10,6 +10,7 @@ from .models import mp3LocalMusic
 from .models import Device
 from .models import Picture
 from .forms import mp3MusicForm
+from .forms import mp3LocalMusicForm
 from .forms import ArtistForm
 
 
@@ -40,6 +41,23 @@ def add_mp3(request):
             return redirect(reverse_lazy('addmp3'))
     else:
         form = mp3MusicForm()
+        artistform = ArtistForm()
+        return render(request, 'mp3music_crud/mp3music_create.html', {'form': form,
+                                                                      'artistform': artistform})
+
+
+def add_local_mp3(request):
+    if request.method == 'POST':
+        form = mp3LocalMusicForm(request.POST)
+        artistform = ArtistForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect(reverse_lazy('musicpage'))
+        if artistform.is_valid():
+            artistform.save(commit=True)
+            return redirect(reverse_lazy('addlocalmp3'))
+    else:
+        form = mp3LocalMusicForm()
         artistform = ArtistForm()
         return render(request, 'mp3music_crud/mp3music_create.html', {'form': form,
                                                                       'artistform': artistform})
@@ -95,9 +113,3 @@ class AddYandexMusic(CreateView):
     model = YandexMusic
     template_name = 'yandexmusic_crud/yandexmusic_create.html'
     fields = ['musicName', 'artist', 'trackInt', 'albumInt', 'artistInt']
-
-
-class Addmp3LocalMusic(CreateView):
-    model = mp3LocalMusic
-    template_name = 'base_form/base_form.html'
-    fields = ['artist', 'musicName', 'musicFile']

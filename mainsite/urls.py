@@ -14,5 +14,5 @@ urlpatterns = [
     path('adddevice', views.AddDevice.as_view()),
     path('addyandex', views.AddYandexMusic.as_view()),
     path('addmp3', views.add_mp3, name='addmp3'),
-    path('addlocalmp3', views.Addmp3LocalMusic.as_view()),
+    path('addlocalmp3', views.add_local_mp3, name='addlocalmp3'),
 ]
