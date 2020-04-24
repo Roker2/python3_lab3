@@ -13,6 +13,8 @@ from .forms import mp3MusicForm
 from .forms import mp3LocalMusicForm
 from .forms import YandexMusicForm
 from .forms import ArtistForm
+from .forms import DeviceForm
+from .forms import PictureForm
 
 
 def mainpage(request):
@@ -99,6 +101,23 @@ def add_yandex_music(request):
                                                                       'artistform': artistform})
 
 
+def add_device(request):
+    if request.method == 'POST':
+        deviceform = DeviceForm(request.POST)
+        pictureform = PictureForm(request.POST)
+        if deviceform.is_valid():
+            deviceform.save(commit=True)
+            return redirect(reverse_lazy('devicespage'))
+        if pictureform.is_valid():
+            pictureform.save(commit=True)
+            return redirect(reverse_lazy('adddevice'))
+    else:
+        deviceform = DeviceForm()
+        pictureform = PictureForm()
+        return render(request, 'device_crud/device_create.html', {'form': deviceform,
+                                                                  'pictureform': pictureform})
+
+
 class ArtistList(ListView):
     model = Artist
     template_name = 'artist_crud/artist_list.html'
@@ -137,9 +156,3 @@ class UploadPic(CreateView):
 
     def set_success_url(self, url):
         self.success_url = reverse_lazy(url)
-
-
-class AddDevice(CreateView):
-    model = Device
-    template_name = 'device_crud/device_create.html'
-    fields = ['name', 'picture', 'url']

@@ -3,6 +3,8 @@ from .models import mp3Music
 from .models import mp3LocalMusic
 from .models import YandexMusic
 from .models import Artist
+from .models import Device
+from .models import Picture
 
 
 class mp3MusicForm(ModelForm):
@@ -27,3 +29,15 @@ class ArtistForm(ModelForm):
     class Meta:
         model = Artist
         fields = ['Name']
+
+
+class DeviceForm(ModelForm):
+    class Meta:
+        model = Device
+        fields = ['name', 'picture', 'url']
+
+
+class PictureForm(ModelForm):
+    class Meta:
+        model = Picture
+        fields = ['name', 'file']
