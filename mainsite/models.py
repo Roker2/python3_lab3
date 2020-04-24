@@ -28,6 +28,14 @@ class Device(models.Model):
 class Artist(models.Model):
     Name = models.CharField(max_length=50)
 
+    def save(self, *args, **kwargs):
+        ArtistList = Artist.objects.filter(Name=self.Name)
+        print(len(ArtistList))
+        if len(ArtistList) != 0:
+            return 0
+        super(Artist, self).save(*args, **kwargs)
+        return 1
+
     def __str__(self):
         return self.Name
 

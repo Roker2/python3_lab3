@@ -54,8 +54,14 @@ def add_local_mp3(request):
             form.save(commit=True)
             return redirect(reverse_lazy('musicpage'))
         if artistform.is_valid():
-            artistform.save(commit=True)
-            return redirect(reverse_lazy('addlocalmp3'))
+            artist = artistform.save(commit=False)
+            if artist.save():
+                return redirect(reverse_lazy('addlocalmp3'))
+            else:
+                request.method = None
+                form = mp3LocalMusicForm()
+                return render(request, 'mp3music_crud/mp3music_create_is_exist.html', {'form': form,
+                                                                              'artistform': artistform})
     else:
         form = mp3LocalMusicForm()
         artistform = ArtistForm()
