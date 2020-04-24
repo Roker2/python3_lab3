@@ -12,7 +12,7 @@ urlpatterns = [
     path('delete/<int:pk>', views.ArtistDelete.as_view(), name='artist_delete'),
     path('uploadpic', views.UploadPic.as_view()),
     path('adddevice', views.AddDevice.as_view()),
-    path('addyandex', views.AddYandexMusic.as_view()),
+    path('addyandex', views.add_yandex_music, name='addyandex'),
     path('addmp3', views.add_mp3, name='addmp3'),
     path('addlocalmp3', views.add_local_mp3, name='addlocalmp3'),
 ]
