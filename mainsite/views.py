@@ -112,8 +112,9 @@ def add_device(request):
         if pictureform.is_valid():
             pictureform.save()
             return redirect(reverse_lazy('adddevice'))
+    else:
+        pictureform = PictureForm()
     deviceform = DeviceForm()
-    pictureform = PictureForm()
     return render(request, 'device_crud/device_create.html', {'form': deviceform,
                                                               'pictureform': pictureform})
 
