@@ -103,19 +103,19 @@ def add_yandex_music(request):
 
 def add_device(request):
     if request.method == 'POST':
+        print(request.FILES)
         deviceform = DeviceForm(request.POST)
-        pictureform = PictureForm(request.POST)
+        pictureform = PictureForm(request.POST, request.FILES)
         if deviceform.is_valid():
             deviceform.save(commit=True)
             return redirect(reverse_lazy('devicespage'))
         if pictureform.is_valid():
-            pictureform.save(commit=True)
+            pictureform.save()
             return redirect(reverse_lazy('adddevice'))
-    else:
-        deviceform = DeviceForm()
-        pictureform = PictureForm()
-        return render(request, 'device_crud/device_create.html', {'form': deviceform,
-                                                                  'pictureform': pictureform})
+    deviceform = DeviceForm()
+    pictureform = PictureForm()
+    return render(request, 'device_crud/device_create.html', {'form': deviceform,
+                                                              'pictureform': pictureform})
 
 
 class ArtistList(ListView):
