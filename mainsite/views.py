@@ -153,7 +153,7 @@ class UploadPic(CreateView):
     model = Picture
     template_name = 'picture_crud/picture_create.html'
     fields = ['name', 'file']
-    reverse_lazy('')
+    success_url = reverse_lazy('mainpage')
 
     def set_success_url(self, url):
         self.success_url = reverse_lazy(url)
