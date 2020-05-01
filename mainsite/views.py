@@ -57,7 +57,7 @@ def add_mp3(request):
 
 def add_local_mp3(request):
     if request.method == 'POST':
-        form = mp3LocalMusicForm(request.POST)
+        form = mp3LocalMusicForm(request.POST, request.FILES)
         artistform = ArtistForm(request.POST)
         if form.is_valid():
             form.save(commit=True)
