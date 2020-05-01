@@ -1,0 +1,29 @@
+<html>
+    <!--head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head-->
+    <body>
+        <table>
+            <tbody>
+                {% load imagefit %}
+                {% for pic in object_list %}
+                    <tr>
+                        <td>
+                            <figure>
+                                <img src="{{ pic.file.url|resize:'500x300' }}">
+                                <figcaption>{{ pic.name }}</figcaption>
+                            </figure>
+                        </td>
+                        <td>
+                            <a href="{% url "pic_delete" pic.id  %}">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url "uploadpic" %}">Upload picture</a>
+    </body>
+</html>
