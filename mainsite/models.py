@@ -1,10 +1,16 @@
 from django.db import models
+from django.conf import settings
+import os
 
 
 # For saving memory
 class Picture(models.Model):
     name = models.CharField(max_length=50)
     file = models.ImageField()
+
+    def delete(self, using=None, keep_parents=False):
+        os.remove(os.path.join(settings.MEDIA_ROOT, self.file.name))
+        super(Picture, self).delete(using, keep_parents)
 
     def publish(self):
         self.save()
