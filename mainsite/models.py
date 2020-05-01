@@ -89,6 +89,10 @@ class mp3LocalMusic(models.Model):
     musicName = models.CharField(max_length=50)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
 
+    def delete(self, using=None, keep_parents=False):
+        os.remove(os.path.join(settings.MEDIA_ROOT, self.musicFile.name))
+        super(mp3LocalMusic, self).delete(using, keep_parents)
+
     def publish(self):
         self.save()
 
