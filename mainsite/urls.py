@@ -17,7 +17,7 @@ urlpatterns = [
     path('piclist', picture_views.PicturesList.as_view(), name='piclist'),
     path('pic_delete/<int:pk>', picture_views.PicturesDelete.as_view(), name='pic_delete'),
     path('adddevice', views.add_device, name='adddevice'),
-    path('addyandex', music_views.add_yandex_music, name='addyandex'),
-    path('addmp3', music_views.add_mp3, name='addmp3'),
-    path('addlocalmp3', music_views.add_local_mp3, name='addlocalmp3'),
+    path('addyandex', music_views.AddYandexMusicView.as_view(), name='addyandex'),
+    path('addmp3', music_views.AddMp3View.as_view(), name='addmp3'),
+    path('addlocalmp3', music_views.AllLocalMp3View.as_view(), name='addlocalmp3'),
 ]
