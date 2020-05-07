@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, DeleteView
 from django.shortcuts import redirect
-from .models import Artist
 from .models import YandexMusic
 from .models import mp3Music
 from .models import mp3LocalMusic
@@ -117,37 +116,6 @@ def add_device(request):
     deviceform = DeviceForm()
     return render(request, 'device_crud/device_create.html', {'form': deviceform,
                                                               'pictureform': pictureform})
-
-
-class ArtistList(ListView):
-    model = Artist
-    template_name = 'artist_crud/artist_list.html'
-
-
-class ArtistDetail(DetailView):
-    model = Artist
-    template_name = 'artist_crud/artist_details.html'
-
-
-class ArtistCreate(CreateView):
-    model = Artist
-    template_name = 'artist_crud/artist_form.html'
-    fields = ['Name']
-    success_url = reverse_lazy('artist_list')
-
-
-class ArtistUpdate(UpdateView):
-    model = Artist
-    template_name = 'artist_crud/artist_form.html'
-    fields = ['Name']
-    success_url = reverse_lazy('artist_list')
-
-
-class ArtistDelete(DeleteView):
-    model = Artist
-    template_name = 'artist_crud/artist_confirm_delete.html'
-    success_url = reverse_lazy('artist_list')
-
 
 class UploadPic(CreateView):
     model = Picture
