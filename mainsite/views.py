@@ -46,7 +46,7 @@ def add_mp3(request):
                 request.method = None
                 form = mp3MusicForm()
                 return render(request, 'mp3music_crud/mp3music_create_is_exist.html', {'form': form,
-                                                                              'artistform': artistform})
+                                                                                       'artistform': artistform})
     else:
         form = mp3MusicForm()
         artistform = ArtistForm()
@@ -69,7 +69,7 @@ def add_local_mp3(request):
                 request.method = None
                 form = mp3LocalMusicForm()
                 return render(request, 'mp3music_crud/mp3music_create_is_exist.html', {'form': form,
-                                                                              'artistform': artistform})
+                                                                                       'artistform': artistform})
     else:
         form = mp3LocalMusicForm()
         artistform = ArtistForm()
@@ -92,12 +92,12 @@ def add_yandex_music(request):
                 request.method = None
                 form = YandexMusicForm()
                 return render(request, 'yandexmusic_crud/yandexmusic_create_is_exist.html', {'form': form,
-                                                                              'artistform': artistform})
+                                                                                             'artistform': artistform})
     else:
         form = YandexMusicForm()
         artistform = ArtistForm()
         return render(request, 'yandexmusic_crud/yandexmusic_create.html', {'form': form,
-                                                                      'artistform': artistform})
+                                                                            'artistform': artistform})
 
 
 def add_device(request):
@@ -116,6 +116,7 @@ def add_device(request):
     deviceform = DeviceForm()
     return render(request, 'device_crud/device_create.html', {'form': deviceform,
                                                               'pictureform': pictureform})
+
 
 class UploadPic(CreateView):
     model = Picture
