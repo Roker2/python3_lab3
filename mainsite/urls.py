@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from . import artist_views
 from . import picture_views
+from . import music_views
 
 urlpatterns = [
     path('', views.MainPageView.as_view(), name='mainpage'),
@@ -16,7 +17,7 @@ urlpatterns = [
     path('piclist', picture_views.PicturesList.as_view(), name='piclist'),
     path('pic_delete/<int:pk>', picture_views.PicturesDelete.as_view(), name='pic_delete'),
     path('adddevice', views.add_device, name='adddevice'),
-    path('addyandex', views.add_yandex_music, name='addyandex'),
-    path('addmp3', views.add_mp3, name='addmp3'),
-    path('addlocalmp3', views.add_local_mp3, name='addlocalmp3'),
+    path('addyandex', music_views.add_yandex_music, name='addyandex'),
+    path('addmp3', music_views.add_mp3, name='addmp3'),
+    path('addlocalmp3', music_views.add_local_mp3, name='addlocalmp3'),
 ]
