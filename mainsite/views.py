@@ -28,8 +28,8 @@ class DevicePageView(View):
         return render(request, 'devicespage/devicespage.html', {'devices': Device.objects.all()})
 
 
-def add_device(request):
-    if request.method == 'POST':
+class AddDeviceView(View):
+    def post(self, request):
         print(request.FILES)
         deviceform = DeviceForm(request.POST)
         pictureform = PictureForm(request.POST, request.FILES)
@@ -39,9 +39,10 @@ def add_device(request):
         if pictureform.is_valid():
             pictureform.save()
             return redirect(reverse_lazy('adddevice'))
-    else:
+
+    def get(self, request):
         pictureform = PictureForm()
-    deviceform = DeviceForm()
-    return render(request, 'device_crud/device_create.html', {'form': deviceform,
-                                                              'pictureform': pictureform})
+        deviceform = DeviceForm()
+        return render(request, 'device_crud/device_create.html', {'form': deviceform,
+                                                                  'pictureform': pictureform})
 
