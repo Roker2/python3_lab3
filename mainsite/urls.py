@@ -4,9 +4,9 @@ from . import artist_views
 from . import picture_views
 
 urlpatterns = [
-    path('', views.mainpage, name='mainpage'),
-    path('favoritemusic', views.musicpage, name='musicpage'),
-    path('devices', views.devicespage, name='devicespage'),
+    path('', views.MainPageView.as_view(), name='mainpage'),
+    path('favoritemusic', views.MusicPageView.as_view(), name='musicpage'),
+    path('devices', views.DevicePageView.as_view(), name='devicespage'),
     path('artist', artist_views.ArtistList.as_view(), name='artist_list'),
     path('artist/<int:pk>', artist_views.ArtistDetail.as_view(), name='artist_detail'),
     path('create', artist_views.ArtistCreate.as_view(), name='artist_create'),

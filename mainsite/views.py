@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.views import View
 from .models import YandexMusic
 from .models import mp3Music
 from .models import mp3LocalMusic
@@ -13,19 +14,22 @@ from .forms import DeviceForm
 from .forms import PictureForm
 
 
-def mainpage(request):
-    return render(request, 'mainpage/mainpage.html', {})
+class MainPageView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'mainpage/mainpage.html', {})
 
 
-def musicpage(request):
-    return render(request, 'musicpage/musicpage.html',
-                  {'music': YandexMusic.objects.all(),
-                   'mp3s': mp3Music.objects.all(),
-                   'localmp3s': mp3LocalMusic.objects.all()})
+class MusicPageView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'musicpage/musicpage.html',
+                      {'music': YandexMusic.objects.all(),
+                       'mp3s': mp3Music.objects.all(),
+                       'localmp3s': mp3LocalMusic.objects.all()})
 
 
-def devicespage(request):
-    return render(request, 'devicespage/devicespage.html', {'devices': Device.objects.all()})
+class DevicePageView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'devicespage/devicespage.html', {'devices': Device.objects.all()})
 
 
 def add_mp3(request):
