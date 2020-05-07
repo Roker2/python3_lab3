@@ -11,12 +11,12 @@ from .forms import PictureForm
 
 
 class MainPageView(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         return render(request, 'mainpage/mainpage.html', {})
 
 
 class MusicPageView(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         return render(request, 'musicpage/musicpage.html',
                       {'music': YandexMusic.objects.all(),
                        'mp3s': mp3Music.objects.all(),
@@ -24,7 +24,7 @@ class MusicPageView(View):
 
 
 class DevicePageView(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         return render(request, 'devicespage/devicespage.html', {'devices': Device.objects.all()})
 
 
