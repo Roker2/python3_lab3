@@ -8,7 +8,7 @@
 {% for device in devices %}
     <figure>
         <p><img src="{{ device.picture.file.url|resize:'500x300' }}"></p>
-        <figcaption>{{ device.name }}</figcaption>
+        <figcaption><a href={{ device.url }}>{{ device.name }}</a></figcaption>
     </figure>
 {% endfor %}
 {% endblock %}
