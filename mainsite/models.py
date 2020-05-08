@@ -12,9 +12,6 @@ class Picture(models.Model):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.file.name))
         super(Picture, self).delete(using, keep_parents)
 
-    def publish(self):
-        self.save()
-
     def __str__(self):
         return self.name
 
@@ -23,9 +20,6 @@ class Device(models.Model):
     name = models.CharField(max_length=50)
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)
     url = models.URLField()
-
-    def publish(self):
-        self.save()
 
     def __str__(self):
         return self.name
@@ -74,9 +68,6 @@ class mp3Music(models.Model):
     musicName = models.CharField(max_length=50)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
 
-    def publish(self):
-        self.save()
-
     def fullsinglename(self):
         return str(self)
 
@@ -92,9 +83,6 @@ class mp3LocalMusic(models.Model):
     def delete(self, using=None, keep_parents=False):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.musicFile.name))
         super(mp3LocalMusic, self).delete(using, keep_parents)
-
-    def publish(self):
-        self.save()
 
     def fullsinglename(self):
         return str(self)
