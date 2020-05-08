@@ -32,9 +32,9 @@ class Artist(models.Model):
     Name = models.CharField(max_length=50)
 
     def save(self, *args, **kwargs):
-        ArtistList = Artist.objects.filter(Name=self.Name)
-        print(len(ArtistList))
-        if len(ArtistList) != 0:
+        artist_list = Artist.objects.filter(Name=self.Name)
+        print(len(artist_list))
+        if len(artist_list) != 0:
             return 0
         super(Artist, self).save(*args, **kwargs)
         return 1
@@ -50,7 +50,7 @@ class BaseMusic(models.Model):
     musicName = models.CharField(max_length=50)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
 
-    def fullsinglename(self):
+    def full_single_name(self):
         return str(self)
 
     def __str__(self):
