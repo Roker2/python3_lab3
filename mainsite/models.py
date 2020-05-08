@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from . import base_models
 import os
 
 
@@ -44,7 +43,21 @@ class Artist(models.Model):
         return self.Name
 
 
-class YandexMusic(base_models.BaseMusic):
+class BaseMusic(models.Model):
+    class Meta:
+        abstract = True
+
+    musicName = models.CharField(max_length=50)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
+
+    def fullsinglename(self):
+        return str(self)
+
+    def __str__(self):
+        return str(self.artist) + ' - ' + str(self.musicName)
+
+
+class YandexMusic(BaseMusic):
     trackInt = models.IntegerField(default=0)
     albumInt = models.IntegerField(default=0)
     artistInt = models.IntegerField(default=0)
@@ -59,11 +72,11 @@ class YandexMusic(base_models.BaseMusic):
         return YANDEX_MUSIC_URL + '/artist/' + str(self.albumInt)
 
 
-class mp3Music(base_models.BaseMusic):
+class mp3Music(BaseMusic):
     musicUrl = models.URLField(default="https://")
 
 
-class mp3LocalMusic(base_models.BaseMusic):
+class mp3LocalMusic(BaseMusic):
     musicFile = models.FileField()
 
     def delete(self, using=None, keep_parents=False):
