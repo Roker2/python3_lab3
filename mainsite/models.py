@@ -3,6 +3,9 @@ from django.conf import settings
 import os
 
 
+YANDEX_MUSIC_URL = 'https://music.yandex.ru'
+
+
 # For saving memory
 class Picture(models.Model):
     name = models.CharField(max_length=50)
@@ -60,17 +63,17 @@ class YandexMusic(BaseMusic):
     artistInt = models.IntegerField(default=0)
 
     def musicUrlWithGrid(self) -> str:
-        return 'https://music.yandex.ru/iframe/#track/' + str(self.trackInt) + '/' + str(self.albumInt)
+        return YANDEX_MUSIC_URL + '/iframe/#track/' + str(self.trackInt) + '/' + str(self.albumInt)
 
     def musicUrl(self) -> str:
-        return 'https://music.yandex.ru/album/' + str(self.albumInt) + '/track/' + str(self.trackInt)
+        return YANDEX_MUSIC_URL + '/album/' + str(self.albumInt) + '/track/' + str(self.trackInt)
 
     def artistUrl(self) -> str:
-        return 'https://music.yandex.ru/artist/' + str(self.albumInt)
+        return YANDEX_MUSIC_URL + '/artist/' + str(self.albumInt)
 
 
 class mp3Music(BaseMusic):
-    musicUrl = models.URLField()
+    musicUrl = models.URLField(default="https://")
 
 
 class mp3LocalMusic(BaseMusic):
