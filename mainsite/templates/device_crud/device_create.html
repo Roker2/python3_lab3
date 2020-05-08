@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content_after %}
     <h1>Picture</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ pictureform.as_p }}
         <input type="submit" value="Submit"/>

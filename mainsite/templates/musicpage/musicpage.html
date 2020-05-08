@@ -12,7 +12,7 @@
     {% endfor %}
     {% for mp3 in mp3s %}
         <div class="container-audio">
-            <h3>{{ mp3.fullsinglename }}</h3>
+            <h3>{{ mp3.full_single_name }}</h3>
             <audio controls>
                 <source src={{ mp3.musicUrl }} >
                 Your browser dose not Support the audio Tag
@@ -21,7 +21,7 @@
     {% endfor %}
     {% for mp3 in localmp3s %}
         <div class="container-audio">
-            <h3>{{ mp3.fullsinglename }}</h3>
+            <h3>{{ mp3.full_single_name }}</h3>
             <audio controls>
                 <source src={{ mp3.musicFile.url }} >
                 Your browser dose not Support the audio Tag
