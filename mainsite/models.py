@@ -40,9 +40,21 @@ class Artist(models.Model):
         return self.Name
 
 
-class YandexMusic(models.Model):
+class BaseMusic(models.Model):
+    class Meta:
+        abstract = True
+
     musicName = models.CharField(max_length=50)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
+
+    def fullsinglename(self):
+        return str(self)
+
+    def __str__(self):
+        return str(self.artist) + ' - ' + str(self.musicName)
+
+
+class YandexMusic(BaseMusic):
     trackInt = models.IntegerField(default=0)
     albumInt = models.IntegerField(default=0)
     artistInt = models.IntegerField(default=0)
@@ -56,36 +68,14 @@ class YandexMusic(models.Model):
     def artistUrl(self) -> str:
         return 'https://music.yandex.ru/artist/' + str(self.albumInt)
 
-    def publish(self):
-        self.save()
 
-    def __str__(self):
-        return str(self.artist) + ' - ' + str(self.musicName)
-
-
-class mp3Music(models.Model):
+class mp3Music(BaseMusic):
     musicUrl = models.URLField()
-    musicName = models.CharField(max_length=50)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
-
-    def fullsinglename(self):
-        return str(self)
-
-    def __str__(self):
-        return str(self.artist) + ' - ' + str(self.musicName)
 
 
-class mp3LocalMusic(models.Model):
+class mp3LocalMusic(BaseMusic):
     musicFile = models.FileField()
-    musicName = models.CharField(max_length=50)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
 
     def delete(self, using=None, keep_parents=False):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.musicFile.name))
         super(mp3LocalMusic, self).delete(using, keep_parents)
-
-    def fullsinglename(self):
-        return str(self)
-
-    def __str__(self):
-        return str(self.artist) + ' - ' + str(self.musicName)
