@@ -6,26 +6,28 @@ import os
 YANDEX_MUSIC_URL = 'https://music.yandex.ru'
 
 
-# For saving memory
-class Picture(models.Model):
+class BaseModelWithName(models.Model):
+    class Meta:
+        abstract = True
+
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+# For saving memory
+class Picture(BaseModelWithName):
     file = models.ImageField()
 
     def delete(self, using=None, keep_parents=False):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.file.name))
         super(Picture, self).delete(using, keep_parents)
 
-    def __str__(self):
-        return self.name
 
-
-class Device(models.Model):
-    name = models.CharField(max_length=50)
+class Device(BaseModelWithName):
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)
     url = models.URLField()
-
-    def __str__(self):
-        return self.name
 
 
 class Artist(models.Model):
