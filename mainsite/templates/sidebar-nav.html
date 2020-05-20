@@ -16,7 +16,7 @@
                 <li><a href="/devices">My devices</a></li>
                 <li><a href="/favoritemusic">My favorite music</a></li>
                 {% if request.user.is_authenticated %}
-                    <li><p class="text">You are logged as {{ request.user.first_name }}</p></li>
+                    <li><p class="text">You are logged as {{ request.user.username }}</p></li>
                     <li><a href="{% url "logout" %}">Log out</a></li>
                 {% else %}
                     <li><a href="{% url "login" %}">Log in</a></li>
