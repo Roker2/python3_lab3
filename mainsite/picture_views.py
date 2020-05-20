@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView
 from .models import Picture
 
 
-class UploadPic(CreateView):
+class UploadPic(LoginRequiredMixin, CreateView):
     model = Picture
     template_name = 'picture_crud/picture_create.html'
     fields = ['name', 'file']
@@ -19,7 +20,7 @@ class PicturesList(ListView):
     template_name = "picture_crud/picture_list.html"
 
 
-class PicturesDelete(DeleteView):
+class PicturesDelete(LoginRequiredMixin, DeleteView):
     model = Picture
     template_name = 'picture_crud/picture_confirm_delete.html'
     success_url = reverse_lazy('piclist')
