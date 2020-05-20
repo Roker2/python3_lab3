@@ -17,6 +17,13 @@
     display:block;
 }
 
+.sidebar-nav text {
+    padding:6px 8px 6px 16px;
+    font-size:16px;
+    color: #dbdbdb;
+    display:block;
+}
+
 .sidebar-nav a:hover{
     color:#FFFFFF;
 }
