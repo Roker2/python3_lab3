@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
@@ -30,6 +31,7 @@ class DevicePageView(View):
 
 
 class AddDeviceView(View):
+    @login_required
     def post(self, request):
         logging.debug(request.FILES)
         deviceform = DeviceForm(request.POST)
@@ -41,6 +43,7 @@ class AddDeviceView(View):
             pictureform.save()
             return redirect(reverse_lazy('adddevice'))
 
+    @login_required
     def get(self, request):
         pictureform = PictureForm()
         deviceform = DeviceForm()
