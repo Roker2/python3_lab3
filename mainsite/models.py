@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 import os
+import logging
 
 
 YANDEX_MUSIC_URL = 'https://music.yandex.ru'
@@ -34,11 +35,14 @@ class Artist(models.Model):
     Name = models.CharField(max_length=50)
 
     def save(self, *args, **kwargs):
+        logging.info("Try to find " + self.Name + " in db")
         artist_list = Artist.objects.filter(Name=self.Name)
-        print(len(artist_list))
+        logging.info("Len: " + str(len(artist_list)))
         if len(artist_list) != 0:
+            logging.debug("Return 0, db has this artist")
             return 0
         super(Artist, self).save(*args, **kwargs)
+        logging.debug("Return 1, db saved this artist")
         return 1
 
     def __str__(self):
