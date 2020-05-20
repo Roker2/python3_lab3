@@ -10,14 +10,7 @@
     padding-top:20px;
 }
 
-.sidebar-nav a {
-    padding:6px 8px 6px 16px;
-    font-size:16px;
-    color: #dbdbdb;
-    display:block;
-}
-
-.sidebar-nav text {
+.sidebar-nav a, text {
     padding:6px 8px 6px 16px;
     font-size:16px;
     color: #dbdbdb;
