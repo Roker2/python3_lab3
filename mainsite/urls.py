@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from . import artist_views
 from . import picture_views
@@ -20,4 +20,21 @@ urlpatterns = [
     path('addyandex', music_views.AddYandexMusicView.as_view(), name='addyandex'),
     path('addmp3', music_views.AddMp3View.as_view(), name='addmp3'),
     path('addlocalmp3', music_views.AllLocalMp3View.as_view(), name='addlocalmp3'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+"""
+accounts/login/ [name='login']
+accounts/logout/ [name='logout']
+accounts/password_change/ [name='password_change']
+accounts/password_change/done/ [name='password_change_done']
+accounts/password_reset/ [name='password_reset']
+accounts/password_reset/done/ [name='password_reset_done']
+accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
+accounts/reset/done/ [name='password_reset_complete']
+"""
+"""
+path('registration/login/$', 'django.contrib.auth.views.login', name='login'),
+path('registration/logout/$', 'django.contrib.auth.views.logout', name='logout'),
+path('registration/logout-then-login/$', 'django.contrib.auth.views.logout_then_login', name='logout_then_login'),
+"""
