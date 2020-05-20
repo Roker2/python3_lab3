@@ -8,6 +8,7 @@ from .models import mp3LocalMusic
 from .models import Device
 from .forms import DeviceForm
 from .forms import PictureForm
+import logging
 
 
 class MainPageView(View):
@@ -30,7 +31,7 @@ class DevicePageView(View):
 
 class AddDeviceView(View):
     def post(self, request):
-        print(request.FILES)
+        logging.debug(request.FILES)
         deviceform = DeviceForm(request.POST)
         pictureform = PictureForm(request.POST, request.FILES)
         if deviceform.is_valid():

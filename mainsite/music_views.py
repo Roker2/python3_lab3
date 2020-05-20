@@ -6,10 +6,12 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import View
+import logging
 
 
 class AddMp3View(View):
     def post(self, request):
+        logging.debug(request.FILES)
         form = mp3MusicForm(request.POST)
         artistform = ArtistForm(request.POST)
         if form.is_valid():
