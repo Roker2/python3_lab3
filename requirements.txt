@@ -1,3 +1,4 @@
 Django~=3.0.5
 django-activeurl
 django-imagefit
+Jinja2
