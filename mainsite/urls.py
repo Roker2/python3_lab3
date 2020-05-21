@@ -22,7 +22,7 @@ urlpatterns = [
     path('addlocalmp3', music_views.AllLocalMp3View.as_view(), name='addlocalmp3'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/verify/', views.VerifyProfile.as_view(), name='verify'),
-    path('accounts/verify/<int:code>', views.VerifyProfile.as_view(), name='verify'),
+    path('accounts/verify/<int:code>', views.VerifyProfile.as_view()),
 ]
 
 """
