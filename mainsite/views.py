@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
@@ -53,6 +54,17 @@ class AddDeviceView(LoginRequiredMixin, View):
 
 
 class VerifyProfile(LoginRequiredMixin, View):
+
+    def post(self, request):
+        form = VerifyForm(request.POST)
+        if form.is_valid():
+            logging.debug(form)
+            logging.debug(request.POST)
+            if str(request.user.profile.code) == request.POST.get('code'):
+                return HttpResponse("Same")
+            else:
+                return HttpResponse("Not same")
+
     def get(self, request):
         form = VerifyForm()
         return render(request, 'registration/accept.html', {'form': form})
