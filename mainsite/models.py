@@ -3,6 +3,7 @@ import random
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
+from django.core.mail import send_mail
 import os
 import logging
 
@@ -10,6 +11,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 YANDEX_MUSIC_URL = 'https://music.yandex.ru'
+
+VERIFY_URL = 'http://127.0.0.1:8000/accounts/verify/?code='
 
 
 def generate_code():
@@ -108,6 +111,13 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
+            send_mail(
+                'Verification',
+                'Hi! You need verify your account. Go to the ' + VERIFY_URL + str(instance.profile.code),
+                settings.EMAIL_HOST_USER,
+                [instance.profile.user.email],
+                fail_silently=False,
+            )
             Profile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
