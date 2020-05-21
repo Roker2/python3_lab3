@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
@@ -9,6 +11,10 @@ from django.dispatch import receiver
 
 YANDEX_MUSIC_URL = 'https://music.yandex.ru'
 
+
+def generate_сode():
+    random.seed()
+    return str(random.randint(10000,99999))
 
 class BaseModelWithName(models.Model):
     class Meta:
@@ -96,14 +102,15 @@ class mp3LocalMusic(BaseMusic):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     verified = models.BooleanField(default=False)
+    code = models.BigIntegerField(default=generate_сode())
 
     @receiver(post_save, sender=User)
-    def create_user_profile(self, instance, created, **kwargs):
+    def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
-    def save_user_profile(self, instance, **kwargs):
+    def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
     def __str__(self):
