@@ -15,7 +15,8 @@ import logging
 
 class MainPageView(View):
     def get(self, request):
-        logging.debug("User status: " + str(request.user.profile.verified))
+        if request.user.is_active:
+            logging.debug("User status: " + str(request.user.profile.verified))
         return render(request, 'mainpage/mainpage.html', {})
 
 
