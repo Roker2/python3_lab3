@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -61,10 +62,14 @@ class VerifyProfile(LoginRequiredMixin, View):
             logging.debug(form)
             logging.debug(request.POST)
             if str(request.user.profile.code) == request.POST.get('code'):
-                return HttpResponse("Same")
+                user = User.objects.get(username=request.user.username)
+                user.profile.verified = True
+                user.save()
+                return render(request, 'registration/verified.html')
             else:
-                return HttpResponse("Not same")
+                return render(request, 'registration/accept.html', {'form': form, 'invalid_code': True})
 
     def get(self, request):
-        form = VerifyForm()
-        return render(request, 'registration/accept.html', {'form': form})
+        form = VerifyForm(request.GET)
+        logging.debug(request.GET.get('code'))
+        return render(request, 'registration/accept.html', {'form': form, 'invalid_code': False})

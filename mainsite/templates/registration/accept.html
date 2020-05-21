@@ -2,6 +2,9 @@
 {% block head %}<title>Accept code</title>{% endblock %}
 {% block content %}
     <h1>Accept code</h1>
+    {% if invalid_code %}
+        <p>Invalid code</p>
+    {% endif %}
     <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
