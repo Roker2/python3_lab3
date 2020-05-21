@@ -17,6 +17,9 @@
                 <li><a href="/favoritemusic">My favorite music</a></li>
                 {% if request.user.is_authenticated %}
                     <li><p class="text">You are logged as {{ request.user.username }}</p></li>
+                    {% if not user.profile.verified %}
+                        <li><p>You need to verify account!</p></li>
+                    {% endif %}
                     <li><a href="{% url "logout" %}">Log out</a></li>
                 {% else %}
                     <li><a href="{% url "login" %}">Log in</a></li>
