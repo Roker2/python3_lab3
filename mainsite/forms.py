@@ -1,4 +1,6 @@
 from django.forms import ModelForm
+from django.forms import Form
+from django.forms import CharField
 from .models import mp3Music
 from .models import mp3LocalMusic
 from .models import YandexMusic
@@ -41,3 +43,7 @@ class PictureForm(ModelForm):
     class Meta:
         model = Picture
         fields = ['name', 'file']
+
+
+class VerifyForm(Form):
+    code = CharField(label='Code', max_length=5)

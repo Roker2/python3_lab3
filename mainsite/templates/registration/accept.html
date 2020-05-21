@@ -1,0 +1,10 @@
+{% extends "sidebar-nav.html" %}
+{% block head %}<title>Accept code</title>{% endblock %}
+{% block content %}
+    <h1>Accept code</h1>
+    <form action="." method="post">
+        {{ form.as_p }}
+        <!-- {% csrf_token %} -->
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

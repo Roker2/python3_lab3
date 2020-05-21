@@ -9,6 +9,7 @@ from .models import mp3LocalMusic
 from .models import Device
 from .forms import DeviceForm
 from .forms import PictureForm
+from .forms import VerifyForm
 import logging
 
 
@@ -49,3 +50,8 @@ class AddDeviceView(LoginRequiredMixin, View):
         return render(request, 'device_crud/device_create.html', {'form': deviceform,
                                                                   'pictureform': pictureform})
 
+
+class VerifyProfile(LoginRequiredMixin, View):
+    def get(self, request):
+        form = VerifyForm()
+        return render(request, 'registration/accept.html', {'form': form})
