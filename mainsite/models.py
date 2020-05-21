@@ -12,7 +12,7 @@ from django.dispatch import receiver
 YANDEX_MUSIC_URL = 'https://music.yandex.ru'
 
 
-def generate_сode():
+def generate_code():
     random.seed()
     return str(random.randint(10000,99999))
 
@@ -102,7 +102,7 @@ class mp3LocalMusic(BaseMusic):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     verified = models.BooleanField(default=False)
-    code = models.BigIntegerField(default=generate_сode())
+    code = models.BigIntegerField(default=generate_code())
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
