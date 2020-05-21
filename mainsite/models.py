@@ -14,7 +14,8 @@ YANDEX_MUSIC_URL = 'https://music.yandex.ru'
 
 def generate_code():
     random.seed()
-    return str(random.randint(10000,99999))
+    return str(random.randint(10000, 99999))
+
 
 class BaseModelWithName(models.Model):
     class Meta:
