@@ -1,8 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
 import os
 import logging
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 YANDEX_MUSIC_URL = 'https://music.yandex.ru'
 
@@ -88,3 +91,20 @@ class mp3LocalMusic(BaseMusic):
     def delete(self, using=None, keep_parents=False):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.musicFile.name))
         super(mp3LocalMusic, self).delete(using, keep_parents)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    verified = models.BooleanField(default=False)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(self, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(self, instance, **kwargs):
+        instance.profile.save()
+
+    def __str__(self):
+        return self.user.username
