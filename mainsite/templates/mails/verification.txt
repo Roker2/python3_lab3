@@ -1,0 +1,6 @@
+Hi {{ username }}! You need verify your account!
+Please, go to {{ url }}.
+
+Time of sending: {{ time }}.
+
+Your mail: {{ user_mail }}
