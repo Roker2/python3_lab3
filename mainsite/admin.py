@@ -1,5 +1,6 @@
 import datetime
 import logging
+from multiprocessing import Process
 
 from django.contrib import admin
 
@@ -31,10 +32,18 @@ def send_verify_mail(modeladmin, request, queryset):
         logging.debug(profile.user.email)
 
         if not profile.verified:
+            proc = Process(name='Sending to ' + profile.user.email, target=send_mail_from_template, args=('Verification', {'username': profile.user.username, 'url': VERIFY_URL + str(profile.code),
+                                               'time': datetime.datetime.now().strftime('%H:%M:%S'),
+                                               'user_mail': profile.user.email},
+                                    'mainsite/templates/mails/verification.txt', [profile.user.email]))
+            proc.start()
+            proc.join()
+            """
             send_mail_from_template('Verification', {'username': profile.user.username, 'url': VERIFY_URL + str(profile.code),
                                                'time': datetime.datetime.now().strftime('%H:%M:%S'),
                                                'user_mail': profile.user.email},
                                     'mainsite/templates/mails/verification.txt', [profile.user.email])
+            """
 
 
 send_verify_mail.short_description = 'Sending mails'
